@@ -11,42 +11,60 @@ class BasketEggHunt(object):
     change = False
     move = False
     rooms = {
-        "bedroom_1": {"north": "error",
-                      "south": "hallway_1",
-                      "east": "error",
-                      "west": "error"},
-        "bedroom_2": {"north": "error",
-                      "south": "hallway_2",
-                      "east": "error",
-                      "west": "error"},
-        "study":     {"north": "error",
-                      "south": "hallway_3",
-                      "east": "error",
-                      "west": "error"},
-        "hallway_1": {"north": "bedroom_1",
-                      "south": "bathroom",
-                      "east": "hallway_2",
-                      "west": "error"},
-        "hallway_2": {"north": "bedroom_2",
-                      "south": "kitchen",
-                      "east": "hallway_3",
-                      "west": "hallway_1"},
-        "hallway_3": {"north": "study",
-                      "south": "foyer",
-                      "east": "error",
-                      "west": "hallway_2"},
-        "bathroom":  {"north": "hallway_1",
-                      "south": "error",
-                      "east": "error",
-                      "west": "error"},
-        "kitchen":   {"north": "hallway_2",
-                      "south": "error",
-                      "east": "error",
-                      "west": "error"},
-        "foyer":     {"north": "hallway_3",
-                      "south": "error",
-                      "east": "error",
-                      "west": "error"}
+        "bedroom_1": {
+            "north": "error",
+            "south": "hallway_1",
+            "east": "error",
+            "west": "error"
+            },
+        "bedroom_2": {
+            "north": "error",
+            "south": "hallway_2",
+            "east": "error",
+            "west": "error"
+            },
+        "study": {
+            "north": "error",
+            "south": "hallway_3",
+            "east": "error",
+            "west": "error"
+            },
+        "hallway_1": {
+            "north": "bedroom_1",
+            "south": "bathroom",
+            "east": "hallway_2",
+            "west": "error"
+            },
+        "hallway_2": {
+            "north": "bedroom_2",
+            "south": "kitchen",
+            "east": "hallway_3",
+            "west": "hallway_1"
+            },
+        "hallway_3": {
+            "north": "study",
+            "south": "foyer",
+            "east": "error",
+            "west": "hallway_2"
+            },
+        "bathroom": {
+            "north": "hallway_1",
+            "south": "error",
+            "east": "error",
+            "west": "error"
+            },
+        "kitchen": {
+            "north": "hallway_2",
+            "south": "error",
+            "east": "error",
+            "west": "error"
+            },
+        "foyer": {
+            "north": "hallway_3",
+            "south": "error",
+            "east": "error",
+            "west": "error"
+            }
         }
 
     # global basket and egg counter
