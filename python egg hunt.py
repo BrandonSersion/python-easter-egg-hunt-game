@@ -49,7 +49,7 @@ class BasketEggHunt(object):
                       "west": "error"}
         }
 
-    #global basket and egg counter  
+    # global basket and egg counter
     def __init__(self):
         print("EGG HUNT!")
         print("The object of the game is to find a basket and three eggs.")
@@ -67,9 +67,9 @@ class BasketEggHunt(object):
             egg_room = random.choice(room_choices)
             self.egg_rooms.append(egg_room)
             room_choices.remove(egg_room)
-            i+=1
+            i += 1
         return self.basket_room, self.egg_rooms
-    
+
     def prompt_input(self):
         print()
         print("You are currently in the " + self.current_room)
