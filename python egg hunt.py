@@ -164,17 +164,24 @@ class Game:
             print('CONGRATULATIONS you have won the game.')
 
 
-# Set up initial game state
-game_instance = Game()
-game_instance.print_instructions()
-game_instance.randomize_basket_placement()
-game_instance.randomize_egg_placement()
+# Main Program
 
-# Run game
-while game_instance.eggs_on_map > 0:
-    game_instance.prompt_user_input()
-    if game_instance.basket_on_map:
-        game_instance.check_room_for_basket()
-    else:
-        game_instance.check_room_for_egg()
-game_instance.win_game()
+def main():
+    # Set up initial game state
+    game_instance = Game()
+    game_instance.print_instructions()
+    game_instance.randomize_basket_placement()
+    game_instance.randomize_egg_placement()
+
+    # Run game
+    while game_instance.eggs_on_map > 0:
+        game_instance.prompt_user_input()
+        if game_instance.basket_on_map:
+            game_instance.check_room_for_basket()
+        else:
+            game_instance.check_room_for_egg()
+    game_instance.win_game()
+
+
+if __name__ == "__main__":
+    main()
