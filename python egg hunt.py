@@ -1,12 +1,12 @@
 import random
 
 """Python console game. The game map is stored in a double nested dictionary.
-   The user controls movement by typing 'north', 'south', 'east', or 'west' 
+   The user controls movement by typing 'north', 'south', 'east', or 'west'
    in the terminal. The win condition is to find a basket, then three eggs."""
 
 
 class Game(object):
-    # Variables storing game map
+    # class variables that store game map
     wall = 'wall'
     rooms = {
         'bedroom_1': {
@@ -65,35 +65,47 @@ class Game(object):
         }
     }
 
-    # Functions to set up initial game state
+    # Set up initial game state.
+    # instance variables that track game state
     def __init__(
             self,
-            basket_on_map=True,
-            eggs_on_map=3,
-            current_room='foyer',
+            basket_on_map=True,  # True or False
+            eggs_on_map=3,  # 1-4
             rooms_that_can_have_items=['bedroom_1', 'bedroom_2', 'study',
-                                       'bathroom', 'kitchen']):
-        self.basket_on_map = basket_on_map
-        self.eggs_on_map = eggs_on_map
-        self.current_room = current_room
+                                       'bathroom', 'kitchen'],
+            basket_room='',
+            egg_rooms=[],
+            current_room='foyer'):
+        # settings variables
+        self.basket_on_map = basket_on_map  # assign basket?, track win condition
+        self.eggs_on_map = eggs_on_map  # assign how many eggs?, track win condition
         self.rooms_that_can_have_items = rooms_that_can_have_items
+        # application variables
+        self.basket_room = basket_room  # randomized each game
+        self.egg_rooms = egg_rooms  # randomized each game
+        self.current_room = current_room
 
+    def __str__(self):
+        return 'Left on map - Basket: ' + str(self.basket_on_map) + ', Eggs: '\
+            + str(self.eggs_on_map)
+
+    # functions that initialize game
     def print_instructions(self):
         print("""
         EGG HUNT!
 
         The object of the game is to find a basket then collect three eggs.
 
-        You move through the house by typing the cardinal directions:
+        You move through the house by entering:
               'north', 'south', 'east', or 'west'
         """)
 
     def randomize_basket_placement(self):
-        self.basket_room = random.choice(self.rooms_that_can_have_items)
-        self.rooms_that_can_have_items.remove(self.basket_room)
+        if self.basket_on_map:
+            self.basket_room = random.choice(self.rooms_that_can_have_items)
+            self.rooms_that_can_have_items.remove(self.basket_room)
 
     def randomize_egg_placement(self):
-        self.egg_rooms = []
         i = 0
         while self.eggs_on_map > i:
             egg_room = random.choice(self.rooms_that_can_have_items)
@@ -104,25 +116,25 @@ class Game(object):
     # Functions to run game
 
     # Helper function
-    def get_adjacent_directions(self):
-        adjacent_directions = []
+    def get_options(self):
+        options = []
         if self.rooms[self.current_room]['north'] != self.wall:
-            adjacent_directions.append('north')
+            options.append('north')
         if self.rooms[self.current_room]['south'] != self.wall:
-            adjacent_directions.append('south')
+            options.append('south')
         if self.rooms[self.current_room]['east'] != self.wall:
-            adjacent_directions.append('east')
+            options.append('east')
         if self.rooms[self.current_room]['west'] != self.wall:
-            adjacent_directions.append('west')
-        return adjacent_directions
+            options.append('west')
+        return options
 
-    # Main functions
+    # Main game functions
     def prompt_user_input(self):
         print()
-        adjacent_directions = self.get_adjacent_directions()
-        prompt = input('Which direction would you like to move? Options: '
-                       + str(adjacent_directions) + ' ').lower()
-        if prompt in adjacent_directions:
+        options = self.get_options()
+        prompt = input('Enter the direction you want to move? Options: '
+                       + str(options) + '  ').lower()
+        if prompt in options:
             self.current_room = self.rooms[self.current_room][prompt]
         else:
             print('Dead end! Try a different direction.')
