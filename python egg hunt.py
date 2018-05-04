@@ -1,12 +1,12 @@
 import random
 
 """Python console game. The game map is stored in a double nested dictionary.
-   The user controls their movement by typing 'north', 'south', 'east', or
-   'west' in the terminal."""
+   The user controls movement by typing 'north', 'south', 'east', or 'west' 
+   in the terminal. The win condition is to find a basket, then three eggs."""
 
 
 class Game(object):
-    # The house layout is represented in this dictionary.
+    # Variables storing game map
     wall = 'wall'
     rooms = {
         'bedroom_1': {
@@ -66,12 +66,15 @@ class Game(object):
     }
 
     # Functions to set up initial game state
-    def __init__(self, basket_found=False, number_of_eggs=3,
-                 current_room='foyer',
-                 rooms_that_can_have_items=['bedroom_1', 'bedroom_2', 'study',
-                                            'bathroom', 'kitchen']):
-        self.basket_found = basket_found
-        self.number_of_eggs = number_of_eggs
+    def __init__(
+            self,
+            basket_on_map=True,
+            eggs_on_map=3,
+            current_room='foyer',
+            rooms_that_can_have_items=['bedroom_1', 'bedroom_2', 'study',
+                                       'bathroom', 'kitchen']):
+        self.basket_on_map = basket_on_map
+        self.eggs_on_map = eggs_on_map
         self.current_room = current_room
         self.rooms_that_can_have_items = rooms_that_can_have_items
 
@@ -92,7 +95,7 @@ class Game(object):
     def randomize_egg_placement(self):
         self.egg_rooms = []
         i = 0
-        while self.number_of_eggs > i:
+        while self.eggs_on_map > i:
             egg_room = random.choice(self.rooms_that_can_have_items)
             self.egg_rooms.append(egg_room)
             self.rooms_that_can_have_items.remove(egg_room)
@@ -101,7 +104,7 @@ class Game(object):
     # Functions to run game
 
     # Helper function
-    def preview_adjacent_directions(self):
+    def get_adjacent_directions(self):
         adjacent_directions = []
         if self.rooms[self.current_room]['north'] != self.wall:
             adjacent_directions.append('north')
@@ -116,7 +119,7 @@ class Game(object):
     # Main functions
     def prompt_user_input(self):
         print()
-        adjacent_directions = self.preview_adjacent_directions()
+        adjacent_directions = self.get_adjacent_directions()
         prompt = input('Which direction would you like to move? Options: '
                        + str(adjacent_directions) + ' ').lower()
         if prompt in adjacent_directions:
@@ -126,7 +129,7 @@ class Game(object):
 
     def check_room_for_basket(self):
         if self.current_room == self.basket_room:
-            self.basket_found = True
+            self.basket_on_map = False
             print('YOU FOUND THE BASKET in the ' + self.current_room
                   + '. Now go get those eggs!')
         elif self.current_room in self.egg_rooms:
@@ -137,10 +140,10 @@ class Game(object):
 
     def check_room_for_egg(self):
         if self.current_room in self.egg_rooms:
-            self.number_of_eggs -= 1
+            self.eggs_on_map -= 1
             self.egg_rooms.remove(self.current_room)
             print('YOU FOUND AN EGG in the ' + self.current_room + '. ' +
-                  str(self.number_of_eggs) + ' left!')
+                  str(self.eggs_on_map) + ' left!')
         else:
             print('Found nothing inside ' + self.current_room)
 
@@ -156,9 +159,9 @@ game_instance.randomize_basket_placement()
 game_instance.randomize_egg_placement()
 
 # Run game
-while game_instance.number_of_eggs > 0:
+while game_instance.eggs_on_map > 0:
     game_instance.prompt_user_input()
-    if not game_instance.basket_found:
+    if game_instance.basket_on_map:
         game_instance.check_room_for_basket()
     else:
         game_instance.check_room_for_egg()
