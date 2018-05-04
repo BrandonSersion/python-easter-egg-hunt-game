@@ -6,32 +6,32 @@ import random
 
 
 class Game(object):
-    # class variables that store game map
-    wall = 'wall'
-    rooms = {
+    # class constants that store game map
+    WALL = 'wall'
+    ROOMS = {
         'bedroom_1': {
-            'north': wall,
+            'north': WALL,
             'south': 'hallway_1',
-            'east': wall,
-            'west': wall
+            'east': WALL,
+            'west': WALL
         },
         'bedroom_2': {
-            'north': wall,
+            'north': WALL,
             'south': 'hallway_2',
-            'east': wall,
-            'west': wall
+            'east': WALL,
+            'west': WALL
         },
         'study': {
-            'north': wall,
+            'north': WALL,
             'south': 'hallway_3',
-            'east': wall,
-            'west': wall
+            'east': WALL,
+            'west': WALL
         },
         'hallway_1': {
             'north': 'bedroom_1',
             'south': 'bathroom',
             'east': 'hallway_2',
-            'west': wall
+            'west': WALL
         },
         'hallway_2': {
             'north': 'bedroom_2',
@@ -42,26 +42,26 @@ class Game(object):
         'hallway_3': {
             'north': 'study',
             'south': 'foyer',
-            'east': wall,
+            'east': WALL,
             'west': 'hallway_2'
         },
         'bathroom': {
             'north': 'hallway_1',
-            'south': wall,
-            'east': wall,
-            'west': wall
+            'south': WALL,
+            'east': WALL,
+            'west': WALL
         },
         'kitchen': {
             'north': 'hallway_2',
-            'south': wall,
-            'east': wall,
-            'west': wall
+            'south': WALL,
+            'east': WALL,
+            'west': WALL
         },
         'foyer': {
             'north': 'hallway_3',
-            'south': wall,
-            'east': wall,
-            'west': wall
+            'south': WALL,
+            'east': WALL,
+            'west': WALL
         }
     }
 
@@ -118,13 +118,13 @@ class Game(object):
     # Helper function
     def get_options(self):
         options = []
-        if self.rooms[self.current_room]['north'] != self.wall:
+        if self.ROOMS[self.current_room]['north'] != self.WALL:
             options.append('north')
-        if self.rooms[self.current_room]['south'] != self.wall:
+        if self.ROOMS[self.current_room]['south'] != self.WALL:
             options.append('south')
-        if self.rooms[self.current_room]['east'] != self.wall:
+        if self.ROOMS[self.current_room]['east'] != self.WALL:
             options.append('east')
-        if self.rooms[self.current_room]['west'] != self.wall:
+        if self.ROOMS[self.current_room]['west'] != self.WALL:
             options.append('west')
         return options
 
@@ -135,7 +135,7 @@ class Game(object):
         prompt = input('Enter the direction you want to move? Options: '
                        + str(options) + '  ').lower()
         if prompt in options:
-            self.current_room = self.rooms[self.current_room][prompt]
+            self.current_room = self.ROOMS[self.current_room][prompt]
         else:
             print('Dead end! Try a different direction.')
 
