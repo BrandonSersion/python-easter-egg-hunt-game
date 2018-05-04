@@ -5,7 +5,7 @@ import random
    in the terminal. The win condition is to find a basket, then three eggs."""
 
 
-class Game(object):
+class Game:
     # class constants that store game map
     WALL = 'wall'
     ROOMS = {
