@@ -115,7 +115,7 @@ class Game:
 
     # Functions to run game
 
-    # Helper function
+    # helper function
     def get_options(self):
         options = []
         if self.ROOMS[self.current_room]['north'] != self.WALL:
@@ -128,7 +128,7 @@ class Game:
             options.append('west')
         return options
 
-    # Main game functions
+    # game functions
     def prompt_user_input(self):
         print()
         options = self.get_options()
