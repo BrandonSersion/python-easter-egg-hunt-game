@@ -6,7 +6,7 @@ import random
 
 
 class Game:
-    # class constants that store game map
+    # Game map.
     WALL = 'wall'
     ROOMS = {
         'bedroom_1': {
@@ -65,8 +65,7 @@ class Game:
         }
     }
 
-    # Set up initial game state.
-    # instance variables that track game state
+    # Set up.
     def __init__(
             self,
             basket_on_map=True,  # True or False
@@ -76,20 +75,18 @@ class Game:
             basket_room='',
             egg_rooms=[],
             current_room='foyer'):
-        # settings variables
-        self.basket_on_map = basket_on_map  # assign basket?, track win condition
-        self.eggs_on_map = eggs_on_map  # assign how many eggs?, track win condition
+
+        self.basket_on_map = basket_on_map
+        self.eggs_on_map = eggs_on_map
         self.rooms_that_can_have_items = rooms_that_can_have_items
-        # application variables
-        self.basket_room = basket_room  # randomized each game
-        self.egg_rooms = egg_rooms  # randomized each game
+        self.basket_room = basket_room
+        self.egg_rooms = egg_rooms
         self.current_room = current_room
 
     def __str__(self):
         return 'Left on map - Basket: ' + str(self.basket_on_map) + ', Eggs: '\
             + str(self.eggs_on_map)
 
-    # functions that initialize game
     def print_instructions(self):
         print("""
         EGG HUNT!
@@ -100,12 +97,12 @@ class Game:
               'north', 'south', 'east', or 'west'
         """)
 
-    def randomize_basket_placement(self):
+    def randomize_basket_room(self):
         if self.basket_on_map:
             self.basket_room = random.choice(self.rooms_that_can_have_items)
             self.rooms_that_can_have_items.remove(self.basket_room)
 
-    def randomize_egg_placement(self):
+    def randomize_egg_rooms(self):
         i = 0
         while self.eggs_on_map > i:
             egg_room = random.choice(self.rooms_that_can_have_items)
@@ -113,25 +110,23 @@ class Game:
             self.rooms_that_can_have_items.remove(egg_room)
             i += 1
 
-    # Functions to run game
-
-    # helper function
-    def get_options(self):
-        options = []
+    # Run game helper.
+    def get_nearby_rooms(self):
+        nearby_rooms = []
         if self.ROOMS[self.current_room]['north'] != self.WALL:
-            options.append('north')
+            nearby_rooms.append('north')
         if self.ROOMS[self.current_room]['south'] != self.WALL:
-            options.append('south')
+            nearby_rooms.append('south')
         if self.ROOMS[self.current_room]['east'] != self.WALL:
-            options.append('east')
+            nearby_rooms.append('east')
         if self.ROOMS[self.current_room]['west'] != self.WALL:
-            options.append('west')
-        return options
+            nearby_rooms.append('west')
+        return nearby_rooms
 
-    # game functions
+    # Run game.
     def prompt_user_input(self):
         print()
-        options = self.get_options()
+        options = self.get_nearby_rooms()
         prompt = input('Enter the direction you want to move? Options: '
                        + str(options) + '  ').lower()
         if prompt in options:
@@ -164,16 +159,14 @@ class Game:
             print('CONGRATULATIONS you have won the game.')
 
 
-# Main Program
-
 def main():
-    # Set up initial game state
+    # Set up.
     game_instance = Game()
     game_instance.print_instructions()
-    game_instance.randomize_basket_placement()
-    game_instance.randomize_egg_placement()
+    game_instance.randomize_basket_room()
+    game_instance.randomize_egg_rooms()
 
-    # Run game
+    # Run game.
     while game_instance.eggs_on_map > 0:
         game_instance.prompt_user_input()
         if game_instance.basket_on_map:
