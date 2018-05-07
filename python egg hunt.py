@@ -113,14 +113,9 @@ class Game:
     # Run game helper.
     def get_nearby_rooms(self):
         nearby_rooms = []
-        if self.ROOMS[self.current_room]['north'] != self.WALL:
-            nearby_rooms.append('north')
-        if self.ROOMS[self.current_room]['south'] != self.WALL:
-            nearby_rooms.append('south')
-        if self.ROOMS[self.current_room]['east'] != self.WALL:
-            nearby_rooms.append('east')
-        if self.ROOMS[self.current_room]['west'] != self.WALL:
-            nearby_rooms.append('west')
+        for key, value in self.ROOMS[self.current_room].items():
+            if value != self.WALL:
+                nearby_rooms.append(key)
         return nearby_rooms
 
     # Run game.
