@@ -6,6 +6,7 @@ import random
 
 
 class Game:
+
     # Game map.
     WALL = 'wall'
     ROOMS = {
@@ -123,7 +124,7 @@ class Game:
     def prompt_user_input(self):
         print()
         options = self.get_prompt_options()
-        prompt = input('Enter the direction you want to move? Options: '
+        prompt = input('Enter the direction you want to move. Options: '
                        + str(options) + '  ').lower()
         if prompt == 'status':
             print(self.__str__())
