@@ -9,38 +9,38 @@ class Game:
     # Game map.
     WALL = 'wall'
     ROOMS = {
-        'bedroom_1': {
+        'bedroom': {
             'west': WALL,
             'east': WALL,
-            'south': 'hallway_1',
+            'south': 'hallway 1',
             'north': WALL
         },
-        'bedroom_2': {
+        'dining room': {
             'west': WALL,
             'east': WALL,
-            'south': 'hallway_2',
+            'south': 'hallway 2',
             'north': WALL
         },
         'study': {
             'west': WALL,
             'east': WALL,
-            'south': 'hallway_3',
+            'south': 'hallway 3',
             'north': WALL
         },
-        'hallway_1': {
+        'hallway 1': {
             'west': WALL,
-            'east': 'hallway_2',
+            'east': 'hallway 2',
             'south': 'bathroom',
-            'north': 'bedroom_1'
+            'north': 'bedroom'
         },
-        'hallway_2': {
-            'west': 'hallway_1',
-            'east': 'hallway_3',
+        'hallway 2': {
+            'west': 'hallway 1',
+            'east': 'hallway 3',
             'south': 'kitchen',
-            'north': 'bedroom_2'
+            'north': 'dining room'
         },
-        'hallway_3': {
-            'west': 'hallway_2',
+        'hallway 3': {
+            'west': 'hallway 2',
             'east': WALL,
             'south': 'foyer',
             'north': 'study'
@@ -49,20 +49,20 @@ class Game:
             'west': WALL,
             'east': WALL,
             'south': WALL,
-            'north': 'hallway_1'
+            'north': 'hallway 1'
 
         },
         'kitchen': {
             'west': WALL,
             'east': WALL,
             'south': WALL,
-            'north': 'hallway_2'
+            'north': 'hallway 2'
         },
         'foyer': {
             'west': WALL,
             'east': WALL,
             'south': WALL,
-            'north': 'hallway_3'
+            'north': 'hallway 3'
         }
     }
 
@@ -71,7 +71,7 @@ class Game:
             self,
             basket_on_map=True,  # True or False
             eggs_on_map=3,  # 1-4
-            rooms_that_can_have_items=['bedroom_1', 'bedroom_2', 'study',
+            rooms_that_can_have_items=['bedroom', 'dining room', 'study',
                                        'bathroom', 'kitchen'],
             basket_room='',
             egg_rooms=[],
