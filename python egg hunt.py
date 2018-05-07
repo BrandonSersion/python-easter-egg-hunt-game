@@ -84,8 +84,8 @@ class Game:
         self.current_room = current_room
 
     def __str__(self):
-        return 'Remaining on the map - Basket: ' + str(self.basket_on_map) + ', Eggs: '\
-            + str(self.eggs_on_map)
+        return 'Remaining on the map - Basket: {}, Eggs: {}'\
+            .format(str(self.basket_on_map), str(self.eggs_on_map))
 
     def print_instructions(self):
         print("""
@@ -122,8 +122,9 @@ class Game:
     def prompt_user_input(self):
         print()
         options = self.get_prompt_options()
-        prompt = input('Enter the direction you want to move. Options: '
-                       + str(options) + '  ').lower()
+        prompt = input('Enter the direction you want to move. Options: {}  '
+            .format(str(options))
+            .lower()
         if prompt == 'status':
             print(self.__str__())
         elif prompt in options:
@@ -134,22 +135,24 @@ class Game:
     def check_room_for_basket(self):
         if self.current_room == self.basket_room:
             self.basket_on_map = False
-            print('YOU FOUND THE BASKET in the ' + self.current_room
-                  + '. Now go get those eggs!')
+            print('YOU FOUND THE BASKET in the {}. Now go get those eggs!'
+                .format(self.current_room))
         elif self.current_room in self.egg_rooms:
-            print('You found an egg in the ' + self.current_room
-                  + ', but you need the basket first!')
+            print('You found an egg in the {}, but you need the basket first!'
+                .format(self.current_room))
         else:
-            print('You are in the ' + self.current_room + '.')
+            print('You are in the {}.'
+                .format(self.current_room))
 
     def check_room_for_egg(self):
         if self.current_room in self.egg_rooms:
             self.eggs_on_map -= 1
             self.egg_rooms.remove(self.current_room)
-            print('YOU FOUND AN EGG in the ' + self.current_room + '. ' +
-                  str(self.eggs_on_map) + ' left!')
+            print('YOU FOUND AN EGG in the {}. {} left!'
+                .format(self.current_room, str(self.eggs_on_map)))
         else:
-            print('You are in the ' + self.current_room + '.')
+            print('You are in the {}.'
+                .format(self.current_room))
 
     def win_game(self):
             print()
