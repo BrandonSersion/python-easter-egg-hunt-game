@@ -1,12 +1,13 @@
 import random
 
-"""Python console game. The game map is stored in a double nested dictionary.
+"""Python console game.
+
+   The game map is stored in a double nested dictionary.
    The user controls movement by typing 'north', 'south', 'east', or 'west'
    in the terminal. The win condition is to find a basket, then three eggs."""
 
 
 class Game:
-
     # Game map.
     WALL = 'wall'
     ROOMS = {
