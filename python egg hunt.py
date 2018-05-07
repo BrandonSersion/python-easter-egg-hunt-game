@@ -84,7 +84,8 @@ class Game:
         self.current_room = current_room
 
     def __str__(self):
-        return 'Remaining on the map - Basket: {}, Eggs: {}'.format(str(self.basket_on_map), str(self.eggs_on_map))
+        return 'Remaining on the map - Basket: {}, Eggs: {}'\
+            .format(str(self.basket_on_map), str(self.eggs_on_map))
 
     def print_instructions(self):
         print("""
@@ -109,7 +110,7 @@ class Game:
             self.rooms_that_can_have_items.remove(egg_room)
             i += 1
 
-    # Run game helper.
+    # 'Run game' helper.
     def get_prompt_options(self):
         options = ['status']
         for key, value in self.ROOMS[self.current_room].items():
