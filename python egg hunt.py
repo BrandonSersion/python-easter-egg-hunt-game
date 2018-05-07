@@ -85,7 +85,7 @@ class Game:
         self.current_room = current_room
 
     def __str__(self):
-        return 'Left on map - Basket: ' + str(self.basket_on_map) + ', Eggs: '\
+        return 'Remaining on the map - Basket: ' + str(self.basket_on_map) + ', Eggs: '\
             + str(self.eggs_on_map)
 
     def print_instructions(self):
@@ -112,20 +112,22 @@ class Game:
             i += 1
 
     # Run game helper.
-    def get_nearby_rooms(self):
-        nearby_rooms = []
+    def get_prompt_options(self):
+        options = ['status']
         for key, value in self.ROOMS[self.current_room].items():
             if value != self.WALL:
-                nearby_rooms.insert(0, key)
-        return nearby_rooms
+                options.insert(0, key)
+        return options
 
     # Run game.
     def prompt_user_input(self):
         print()
-        options = self.get_nearby_rooms()
+        options = self.get_prompt_options()
         prompt = input('Enter the direction you want to move? Options: '
                        + str(options) + '  ').lower()
-        if prompt in options:
+        if prompt == 'status':
+            print(self.__str__())
+        elif prompt in options:
             self.current_room = self.ROOMS[self.current_room][prompt]
         else:
             print('Dead end! Try a different direction.')
@@ -139,7 +141,7 @@ class Game:
             print('You found an egg in the ' + self.current_room
                   + ', but you need the basket first!')
         else:
-            print('Found nothing in the ' + self.current_room)
+            print('You are in the ' + self.current_room + '.')
 
     def check_room_for_egg(self):
         if self.current_room in self.egg_rooms:
@@ -148,11 +150,11 @@ class Game:
             print('YOU FOUND AN EGG in the ' + self.current_room + '. ' +
                   str(self.eggs_on_map) + ' left!')
         else:
-            print('Found nothing inside ' + self.current_room)
+            print('You are in the ' + self.current_room + '.')
 
     def win_game(self):
             print()
-            print('CONGRATULATIONS you have won the game.')
+            print('CONGRATULATIONS you have found all the eggs.')
 
 
 def main():
