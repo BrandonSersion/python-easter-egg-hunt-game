@@ -71,8 +71,8 @@ class Game:
             self,
             basket_on_map=True,  # True or False
             eggs_on_map=3,  # 1-4
-            rooms_that_can_have_items=['bedroom', 'dining room', 'study',
-                                       'bathroom', 'kitchen'],
+            rooms_that_can_have_items=
+                ['bedroom', 'dining room', 'study', 'bathroom', 'kitchen'],
             basket_room='',
             egg_rooms=[],
             current_room='foyer'):
@@ -84,8 +84,7 @@ class Game:
         self.current_room = current_room
 
     def __str__(self):
-        return 'Remaining on the map - Basket: {}, Eggs: {}'\
-            .format(str(self.basket_on_map), str(self.eggs_on_map))
+        return 'Remaining on the map - Basket: {}, Eggs: {}'.format(str(self.basket_on_map), str(self.eggs_on_map))
 
     def print_instructions(self):
         print("""
@@ -123,7 +122,7 @@ class Game:
         print()
         options = self.get_prompt_options()
         prompt = input('Enter the direction you want to move. Options: {}  '
-            .format(str(options))
+            .format(str(options)))\
             .lower()
         if prompt == 'status':
             print(self.__str__())
