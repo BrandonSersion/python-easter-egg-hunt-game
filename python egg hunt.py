@@ -51,7 +51,6 @@ class Game:
             'east': WALL,
             'south': WALL,
             'north': 'hallway 1'
-
         },
         'kitchen': {
             'west': WALL,
