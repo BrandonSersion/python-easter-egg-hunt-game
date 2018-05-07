@@ -10,58 +10,59 @@ class Game:
     WALL = 'wall'
     ROOMS = {
         'bedroom_1': {
-            'north': WALL,
-            'south': 'hallway_1',
+            'west': WALL,
             'east': WALL,
-            'west': WALL
+            'south': 'hallway_1',
+            'north': WALL
         },
         'bedroom_2': {
-            'north': WALL,
-            'south': 'hallway_2',
+            'west': WALL,
             'east': WALL,
-            'west': WALL
+            'south': 'hallway_2',
+            'north': WALL
         },
         'study': {
-            'north': WALL,
-            'south': 'hallway_3',
+            'west': WALL,
             'east': WALL,
-            'west': WALL
+            'south': 'hallway_3',
+            'north': WALL
         },
         'hallway_1': {
-            'north': 'bedroom_1',
-            'south': 'bathroom',
+            'west': WALL,
             'east': 'hallway_2',
-            'west': WALL
+            'south': 'bathroom',
+            'north': 'bedroom_1'
         },
         'hallway_2': {
-            'north': 'bedroom_2',
-            'south': 'kitchen',
+            'west': 'hallway_1',
             'east': 'hallway_3',
-            'west': 'hallway_1'
+            'south': 'kitchen',
+            'north': 'bedroom_2'
         },
         'hallway_3': {
-            'north': 'study',
-            'south': 'foyer',
+            'west': 'hallway_2',
             'east': WALL,
-            'west': 'hallway_2'
+            'south': 'foyer',
+            'north': 'study'
         },
         'bathroom': {
-            'north': 'hallway_1',
-            'south': WALL,
+            'west': WALL,
             'east': WALL,
-            'west': WALL
+            'south': WALL,
+            'north': 'hallway_1'
+
         },
         'kitchen': {
-            'north': 'hallway_2',
-            'south': WALL,
+            'west': WALL,
             'east': WALL,
-            'west': WALL
+            'south': WALL,
+            'north': 'hallway_2'
         },
         'foyer': {
-            'north': 'hallway_3',
-            'south': WALL,
+            'west': WALL,
             'east': WALL,
-            'west': WALL
+            'south': WALL,
+            'north': 'hallway_3'
         }
     }
 
@@ -115,7 +116,7 @@ class Game:
         nearby_rooms = []
         for key, value in self.ROOMS[self.current_room].items():
             if value != self.WALL:
-                nearby_rooms.append(key)
+                nearby_rooms.insert(0, key)
         return nearby_rooms
 
     # Run game.
