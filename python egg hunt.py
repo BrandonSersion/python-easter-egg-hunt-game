@@ -86,7 +86,7 @@ class Game:
 
     def __str__(self):
         return 'Remaining on the map - Basket: {}, Eggs: {}'\
-            .format(str(self.basket_on_map), str(self.eggs_on_map))
+            .format(self.basket_on_map, self.eggs_on_map)
 
     def print_instructions(self):
         print("""
@@ -111,24 +111,26 @@ class Game:
             self.rooms_that_can_have_items.remove(egg_room)
             i += 1
 
+
     # 'Run game' helper.
-    def get_prompt_options(self):
-        options = ['status']
+    def get_nearby_directions(self):
         for key, value in self.ROOMS[self.current_room].items():
-            if value != self.WALL:
-                options.insert(0, key)
-        return options
+            if value is not self.WALL:
+                yield key
+        yield "status"
+
 
     # Run game.
     def prompt_user_input(self):
         print()
-        options = self.get_prompt_options()
+        directions = self.get_nearby_directions()
         prompt = input('Enter the direction you want to move. Options: {}  '
-            .format(str(options)))\
+            .format([dir_ for dir_ in directions]))\
             .lower()
+        directions = self.get_nearby_directions()  # reset generator
         if prompt == 'status':
             print(self.__str__())
-        elif prompt in options:
+        elif prompt in [dir_ for dir_ in directions]:
             self.current_room = self.ROOMS[self.current_room][prompt]
         else:
             print('Dead end! Try a different direction.')
@@ -150,7 +152,7 @@ class Game:
             self.eggs_on_map -= 1
             self.egg_rooms.remove(self.current_room)
             print('YOU FOUND AN EGG in the {}. {} left!'
-                .format(self.current_room, str(self.eggs_on_map)))
+                .format(self.current_room, self.eggs_on_map))
         else:
             print('You are in the {}.'
                 .format(self.current_room))
