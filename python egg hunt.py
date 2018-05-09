@@ -68,6 +68,7 @@ class Game:
     }
 
     # Set up.
+
     def __init__(
             self,
             basket_on_map=True,  # True or False
@@ -113,6 +114,7 @@ class Game:
 
 
     # 'Run game' helper.
+
     def get_nearby_directions(self):
         for key, value in self.ROOMS[self.current_room].items():
             if value is not self.WALL:
@@ -121,6 +123,7 @@ class Game:
 
 
     # Run game.
+
     def prompt_user_input(self):
         print()
         directions = self.get_nearby_directions()
