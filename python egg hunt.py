@@ -85,7 +85,7 @@ class Game:
         self.egg_rooms = egg_rooms
         self.current_room = current_room
 
-    def __str__(self):
+    def __repr__(self):
         return 'Remaining on the map - Basket: {}, Eggs: {}'\
             .format(self.basket_on_map, self.eggs_on_map)
 
