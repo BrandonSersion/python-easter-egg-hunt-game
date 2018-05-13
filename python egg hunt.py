@@ -127,8 +127,8 @@ class Game:
     def prompt_user_input(self):
         print()
         directions = self.get_nearby_directions()
-        prompt = input('Enter the direction you want to move. Options: {}  '
-            .format([dir_ for dir_ in directions]))\
+        prompt = input('Enter the direction you want to move. Options: {}.     >'
+            .format(', '.join([dir_ for dir_ in directions])))\
             .lower()
         directions = self.get_nearby_directions()  # reset generator
         if prompt == 'status':
