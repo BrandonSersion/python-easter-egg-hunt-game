@@ -8,6 +8,7 @@ import random
 
 
 class Game:
+    
     # Game map.
     WALL = 'wall'
     ROOMS = {
@@ -68,13 +69,14 @@ class Game:
     }
 
     # Set up.
-
     def __init__(
             self,
             basket_on_map=True,  # True or False
             eggs_on_map=3,  # 1-4
+            # WARNING the following default gets overwritten on manipulation.
+            # (All mutable types behave this way.)
             rooms_that_can_have_items=
-                ['bedroom', 'dining room', 'study', 'bathroom', 'kitchen'],  # WARNING the default gets overwritten on manipulation. (All mutable types behave this way.)
+                ['bedroom', 'dining room', 'study', 'bathroom', 'kitchen'],
             basket_room='',
             egg_rooms=[],
             current_room='foyer'):
@@ -86,8 +88,9 @@ class Game:
         self.current_room = current_room
 
     def __repr__(self):
-        return 'Remaining on the map - Basket: {}, Eggs: {}'\
-            .format(self.basket_on_map, self.eggs_on_map)
+        return (
+            'Remaining on the map -' 
+            f' Basket: {self.basket_on_map}, Eggs: {self.eggs_on_map}')
 
     def print_instructions(self):
         print("""
@@ -112,24 +115,21 @@ class Game:
             self.rooms_that_can_have_items.remove(egg_room)
             i += 1
 
-
     # 'Run game' helper.
-
     def get_nearby_directions(self):
         for key, value in self.ROOMS[self.current_room].items():
             if value is not self.WALL:
                 yield key
-        yield "status"
-
+        yield 'status'
 
     # Run game.
-
     def prompt_user_input(self):
         print()
         directions = self.get_nearby_directions()
-        prompt = input('Enter the direction you want to move. Options: {}.     >'
-            .format(', '.join([dir_ for dir_ in directions])))\
-            .lower()
+        prompt = input(
+            'Enter the direction you want to move. Options: '
+            f'{", ".join([dir_ for dir_ in directions])}.     >'
+            .lower())
         directions = self.get_nearby_directions()  # reset generator
         if prompt == 'status':
             print(self.__str__())
@@ -141,24 +141,25 @@ class Game:
     def check_room_for_basket(self):
         if self.current_room == self.basket_room:
             self.basket_on_map = False
-            print('YOU FOUND THE BASKET in the {}. Now go get those eggs!'
-                .format(self.current_room))
+            print(
+                f'YOU FOUND THE BASKET in the {self.current_room}.'
+                ' Now go get those eggs!')
         elif self.current_room in self.egg_rooms:
-            print('You found an egg in the {}, but you need the basket first!'
-                .format(self.current_room))
+            print(
+                f'You found an egg in the {self.current_room}'
+                ', but you need the basket first!')
         else:
-            print('You are in the {}.'
-                .format(self.current_room))
+            print(f'You are in the {self.current_room}.')
 
     def check_room_for_egg(self):
         if self.current_room in self.egg_rooms:
             self.eggs_on_map -= 1
             self.egg_rooms.remove(self.current_room)
-            print('YOU FOUND AN EGG in the {}. {} left!'
-                .format(self.current_room, self.eggs_on_map))
+            print(
+                f'YOU FOUND AN EGG in the {self.current_room}.'
+                f' {self.eggs_on_map} left!')
         else:
-            print('You are in the {}.'
-                .format(self.current_room))
+            print(f'You are in the {self.current_room}.')
 
     def win_game(self):
             print()
