@@ -74,7 +74,7 @@ class Game:
             basket_on_map=True,  # True or False
             eggs_on_map=3,  # 1-4
             rooms_that_can_have_items=
-                ['bedroom', 'dining room', 'study', 'bathroom', 'kitchen'],
+                ['bedroom', 'dining room', 'study', 'bathroom', 'kitchen'],  # WARNING the default gets overwritten on manipulation. (All mutable types behave this way.)
             basket_room='',
             egg_rooms=[],
             current_room='foyer'):
