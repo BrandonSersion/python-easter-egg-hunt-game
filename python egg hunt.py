@@ -126,14 +126,14 @@ class Game:
     def prompt_user_input(self):
         print()
         directions = self.get_nearby_directions()
-        prompt = input(
+        prompt = (input(
             'Enter the direction you want to move. Options: '
-            f'{", ".join([dir_ for dir_ in directions])}.     >'
+            f'{", ".join([*directions])}.     >')
             .lower())
         directions = self.get_nearby_directions()  # reset generator
         if prompt == 'status':
             print(self)
-        elif prompt in [dir_ for dir_ in directions]:
+        elif prompt in [*directions]:
             self.current_room = self.ROOMS[self.current_room][prompt]
         else:
             print('Dead end! Try a different direction.')
