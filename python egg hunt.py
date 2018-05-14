@@ -78,7 +78,7 @@ class Game:
                 ['bedroom', 'dining room', 'study', 'bathroom', 'kitchen',],
             basket_room='',
             egg_rooms=[],
-            current_room='foyer'):
+            current_room='foyer',):
         self.basket_on_map = basket_on_map
         self.eggs_on_map = eggs_on_map
         self.rooms_that_can_have_items = rooms_that_can_have_items
