@@ -92,7 +92,8 @@ class Game:
             'Remaining on the map -' 
             f' Basket: {basket_status}, Eggs: {self.eggs_on_map}')
 
-    def print_instructions(self):
+    @staticmethod
+    def print_instructions():
         print("""
         EGG HUNT!
 
@@ -161,7 +162,8 @@ class Game:
         else:
             print(f'You are in the {self.current_room}.')
 
-    def win_game(self):
+    @staticmethod
+    def win_game():
             print()
             print('CONGRATULATIONS you have found all the eggs.')
 
