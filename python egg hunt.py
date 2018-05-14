@@ -8,7 +8,6 @@ import random
 
 
 class Game:
-    
     # Game map.
     WALL = 'wall'
     ROOMS = {
@@ -132,7 +131,7 @@ class Game:
             .lower())
         directions = self.get_nearby_directions()  # reset generator
         if prompt == 'status':
-            print(self.__str__())
+            print(self)
         elif prompt in [dir_ for dir_ in directions]:
             self.current_room = self.ROOMS[self.current_room][prompt]
         else:
