@@ -15,55 +15,55 @@ class Game:
             'west': WALL,
             'east': WALL,
             'south': 'hallway 1',
-            'north': WALL
+            'north': WALL,
         },
         'dining room': {
             'west': WALL,
             'east': WALL,
             'south': 'hallway 2',
-            'north': WALL
+            'north': WALL,
         },
         'study': {
             'west': WALL,
             'east': WALL,
             'south': 'hallway 3',
-            'north': WALL
+            'north': WALL,
         },
         'hallway 1': {
             'west': WALL,
             'east': 'hallway 2',
             'south': 'bathroom',
-            'north': 'bedroom'
+            'north': 'bedroom',
         },
         'hallway 2': {
             'west': 'hallway 1',
             'east': 'hallway 3',
             'south': 'kitchen',
-            'north': 'dining room'
+            'north': 'dining room',
         },
         'hallway 3': {
             'west': 'hallway 2',
             'east': WALL,
             'south': 'foyer',
-            'north': 'study'
+            'north': 'study',
         },
         'bathroom': {
             'west': WALL,
             'east': WALL,
             'south': WALL,
-            'north': 'hallway 1'
+            'north': 'hallway 1',
         },
         'kitchen': {
             'west': WALL,
             'east': WALL,
             'south': WALL,
-            'north': 'hallway 2'
+            'north': 'hallway 2',
         },
         'foyer': {
             'west': WALL,
             'east': WALL,
             'south': WALL,
-            'north': 'hallway 3'
+            'north': 'hallway 3',
         }
     }
 
@@ -75,7 +75,7 @@ class Game:
             # WARNING the following default gets overwritten on manipulation.
             # (All mutable types behave this way.)
             rooms_that_can_have_items=
-                ['bedroom', 'dining room', 'study', 'bathroom', 'kitchen'],
+                ['bedroom', 'dining room', 'study', 'bathroom', 'kitchen',],
             basket_room='',
             egg_rooms=[],
             current_room='foyer'):
@@ -87,9 +87,10 @@ class Game:
         self.current_room = current_room
 
     def __repr__(self):
+        basket_status = 'Yes' if self.basket_on_map else 'No'
         return (
             'Remaining on the map -' 
-            f' Basket: {self.basket_on_map}, Eggs: {self.eggs_on_map}')
+            f' Basket: {basket_status}, Eggs: {self.eggs_on_map}')
 
     def print_instructions(self):
         print("""
