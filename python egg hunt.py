@@ -139,7 +139,7 @@ class Game:
             print('Dead end! Try a different direction.')
 
     def check_room_for_basket(self):
-        if self.current_room == self.basket_room:
+        if self.current_room is self.basket_room:
             self.basket_on_map = False
             print(
                 f'YOU FOUND THE BASKET in the {self.current_room}.'
