@@ -145,12 +145,13 @@ class Game:
             print(
                 f'YOU FOUND THE BASKET in the {self.current_room}.'
                 ' Now go get those eggs!')
+            return
         elif self.current_room in self.egg_rooms:
             print(
                 f'You found an egg in the {self.current_room}'
                 ', but you need the basket first!')
-        else:
-            print(f'You are in the {self.current_room}.')
+            return
+        print(f'You are in the {self.current_room}.')
 
     def check_room_for_egg(self):
         if self.current_room in self.egg_rooms:
